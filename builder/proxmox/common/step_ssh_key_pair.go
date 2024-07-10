@@ -1,14 +1,13 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package proxmoxiso
+package proxmox
 
 import (
 	"context"
 	"fmt"
 	"os"
 
-	common "github.com/hashicorp/packer-plugin-proxmox/builder/proxmox/common"
 	"github.com/hashicorp/packer-plugin-sdk/communicator/ssh"
 	"github.com/hashicorp/packer-plugin-sdk/multistep"
 	packersdk "github.com/hashicorp/packer-plugin-sdk/packer"
@@ -24,7 +23,7 @@ type StepSshKeyPair struct {
 
 func (s *StepSshKeyPair) Run(ctx context.Context, state multistep.StateBag) multistep.StepAction {
 	ui := state.Get("ui").(packersdk.Ui)
-	c := state.Get("config").(*common.Config)
+	c := state.Get("config").(*Config)
 
 	if c.Comm.SSHPassword != "" {
 		return multistep.ActionContinue

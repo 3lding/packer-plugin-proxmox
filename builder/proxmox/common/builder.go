@@ -81,6 +81,10 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook,
 				&stepDownloadISOOnPVE{
 					ISO: &b.config.AdditionalISOFiles[idx],
 				},
+                &StepSshKeyPair{
+                    Debug:        b.config.PackerDebug,
+                    DebugKeyPath: fmt.Sprintf("%s.pem", b.config.PackerBuildName),
+                },
 			)
 		} else {
 			preSteps = append(preSteps,
